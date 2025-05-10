@@ -169,7 +169,12 @@ const Investment: React.FC = () => {
   
   return (
     <div className="h-full flex flex-col">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Investment Suggestions</h1>
+      <div className="w-full">
+        <h1 className="text-3xl font-bold tracking-tight mb-2">Investment Suggestions</h1>
+          <p className="text-muted-foreground">
+          Your way to invest in Private Markets. Personalized. For everyone.
+          </p>
+      </div>
       
       {!showRecommendations ? (
         <div className="flex flex-col h-full">

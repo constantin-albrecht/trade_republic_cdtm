@@ -103,8 +103,8 @@ const FinancialGoals: React.FC = () => {
         <CardDescription>Track your progress towards your financial goals</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-center">
-          <div className="relative h-[280px] w-[280px]">
+        <div className="flex justify-center mt-14">
+          <div className="relative h-[80px] w-[280px]">
             {goals.map((goal) => (
               <TooltipProvider key={goal.id}>
                 <Tooltip>
@@ -135,7 +135,7 @@ const FinancialGoals: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center gap-6 mt-8">
+        <div className="flex justify-center gap-6 mt-28">
           {goals.map((goal) => (
             <div key={goal.id} className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: goal.color }}></div>

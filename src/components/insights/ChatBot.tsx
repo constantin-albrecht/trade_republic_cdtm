@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Card, 
   CardContent, 
@@ -23,7 +23,7 @@ interface Message {
 const initialMessages: Message[] = [
   {
     id: '1',
-    content: "Hello! I'm your financial assistant. How can I help you today?",
+    content: "Hello, Thomas! I'm your TradeX Assitant. How can I help you today?",
     sender: 'bot',
     timestamp: new Date()
   }
@@ -64,7 +64,8 @@ const ChatBot: React.FC = () => {
     // Add system message to guide the AI
     formattedMessages.unshift({
       role: 'system',
-      content: 'You are a helpful financial assistant. Provide concise, clear advice on financial matters. Do not make up information or give financial advice that could be harmful.'
+      content: `You are a helpful financial assistant for your client named Thomas. Provide very concise advice on financial matters. It should be maximum 3 sentences. Do not make up information or give financial advice that could be harmful. Do not use any markup, so do not use * or ** for bold or italics for example. Never tell the user a specific stock or asset to buy or sell. Rather help them understand the pros and cons, but always make it clear that the choice is up to them and that you cannot give financial adivce. This is the data about the user's banking transactions, who has a total of 86 transactions between the 1st of April 2024 to the 30th of June 2024. 14 of these are credits, and 72 are debits. Most of them are card transactions, and the second most frequent transactions are of type PAYIN. All of the transactions are in Euros. Most of the transactions are of type money orders, variety stores, and drug stores & pharmacies. The largest credit was of 699.44 Euros done through PAYIN on the 27th of May 2025, and the largest debit was of 392.17 Euros done through CARD on the 25th of May 2024.
+      Do not use any markup at all!!! This is very important. You have to always include at least one of the pieces of information about the user's transactions.`
     });
 
     try {
@@ -100,11 +101,11 @@ const ChatBot: React.FC = () => {
       <CardHeader className="flex flex-row items-center">
         <CardTitle className="flex items-center">
           <Bot className="h-5 w-5 mr-2" />
-          Financial Assistant
+          Personal TradeX Assistant
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col space-y-4 h-60 overflow-y-auto mb-4 p-2">
+        <div className="flex flex-col space-y-30 h-44 overflow-y-auto mb-4 p-2">
           {messages.map((message) => (
             <div 
               key={message.id}
