@@ -16,8 +16,8 @@ const Overview: React.FC = () => {
   const { financialData } = useMockData();
   
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="space-y-6 w-full">
+      <div className="w-full">
         <h1 className="text-3xl font-bold tracking-tight">Welcome back, {username}</h1>
         <p className="text-muted-foreground">
           Here's your financial overview for {today}
