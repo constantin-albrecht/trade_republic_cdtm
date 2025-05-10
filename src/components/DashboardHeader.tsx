@@ -5,10 +5,9 @@ import { Bell } from 'lucide-react';
 
 interface DashboardHeaderProps {
   balance: string;
-  netWorth: string;
 }
-
-const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance, netWorth }) => {
+ 
+const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance }) => {
   return (
     <header className="bg-white border-b z-50 shadow-sm sticky top-0 w-full">
       <div className="flex items-center justify-between p-4">
@@ -21,10 +20,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance, netWorth }) 
           <div>
             <p className="text-sm text-muted-foreground">Available Balance</p>
             <p className="font-medium text-lg">{balance}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Net Worth</p>
-            <p className="font-medium text-lg">{netWorth}</p>
           </div>
         </div>
         

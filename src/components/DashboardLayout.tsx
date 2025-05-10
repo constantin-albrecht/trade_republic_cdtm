@@ -15,7 +15,6 @@ const DashboardLayout: React.FC = () => {
       <div className="min-h-screen flex flex-col">
         <DashboardHeader 
           balance={financialData.balance} 
-          netWorth={financialData.netWorth} 
         />
         <div className="flex flex-1">
           <div className="w-[180px]">

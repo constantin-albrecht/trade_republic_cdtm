@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Wallet, Lightbulb, Building2 } from 'lucide-react';
 import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
-import { useMockData } from '@/hooks/useMockData';
+import { useRealData } from '@/hooks/useRealData';
 
 const assetClasses = [
   {
@@ -118,7 +118,7 @@ const currentInvestments = [
       value: 2.3,
       isPositive: false
     }
-  }
+  } 
 ];
 
 const Investment: React.FC = () => {
@@ -126,8 +126,8 @@ const Investment: React.FC = () => {
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
   const [showRecommendations, setShowRecommendations] = useState(false);
   
-  // Use our mock data hook
-  const { updateBalance, getAvailableBalance } = useMockData();
+
+  const { updateBalance, getAvailableBalance } = useRealData();
   
   const toggleFilter = (filter: string) => {
     if (selectedFilters.includes(filter)) {
@@ -169,7 +169,7 @@ const Investment: React.FC = () => {
   
   return (
     <div className="h-full flex flex-col">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Investment Opportunities</h1>
+      <h1 className="text-3xl font-bold tracking-tight mb-2">Investment Suggestions</h1>
       
       {!showRecommendations ? (
         <div className="flex flex-col h-full">
@@ -214,7 +214,12 @@ const Investment: React.FC = () => {
         </div>
       ) : (
         <div className="flex flex-col h-full overflow-hidden">
-          <Button 
+          
+          <div className="mb-2">
+            <h2 className="text-lg font-semibold mb-1">Based on your preferences</h2>
+            <p className="text-muted-foreground mb-2 text-sm">Based on your preferences</p>
+            
+            <Button 
             variant="outline" 
             onClick={handleBack}
             className="mb-2 self-start"
@@ -222,11 +227,7 @@ const Investment: React.FC = () => {
           >
             Back to Selection
           </Button>
-          
-          <div className="mb-2">
-            <h2 className="text-lg font-semibold mb-1">Investment Recommendations</h2>
-            <p className="text-muted-foreground mb-2 text-sm">Based on your preferences</p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {recommendedFunds.map((fund) => (
                 <FundCard 

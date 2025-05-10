@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import {
   Dialog,
@@ -12,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TrendingUp, Calendar, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
-import { useMockData } from '@/hooks/useMockData';
+import { useRealData } from '@/hooks/useRealData';
 
 interface Feature {
   text: string;
@@ -44,7 +43,7 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
 }) => {
   const [amount, setAmount] = useState('');
   const minAmount = parseInt(minimumInvestment.replace(/[^0-9]/g, ''));
-  const { getAvailableBalance } = useMockData();
+  const { getAvailableBalance } = useRealData();
   const [availableBalance, setAvailableBalance] = useState(0);
   const [insufficientFunds, setInsufficientFunds] = useState(false);
   

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import Papa from 'papaparse';
 
 interface BankingTransaction {
@@ -46,7 +46,22 @@ const formatCurrency = (amount: number): string => {
   return `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
+// Create context
+export const FinancialDataContext = createContext<{
+  financialData: FinancialData;
+  updateBalance: (amount: number) => void;
+  getAvailableBalance: () => number;
+} | null>(null);
+
 export const useRealData = () => {
+  const context = useContext(FinancialDataContext);
+  if (!context) {
+    throw new Error('useRealData must be used within a FinancialDataProvider');
+  }
+  return context;
+};
+
+export const FinancialDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [financialData, setFinancialData] = useState<FinancialData>({
     balance: '0.00',
     netWorth: '0.00',
@@ -215,5 +230,60 @@ export const useRealData = () => {
     processData();
   }, []);
 
-  return { financialData };
+
+
+
+
+
+
+  
+
+  // Parse a currency string (like $14,752.36) to a number
+const parseCurrency = (currencyString: string): number => {
+  return parseFloat(currencyString.replace(/[$,]/g, ''));
+};
+
+
+  const updateBalance = useCallback((investmentAmount: number) => {
+    setFinancialData(prev => {
+      const currentBalance = parseCurrency(prev.balance);
+      const newBalance = currentBalance - investmentAmount;
+       
+      // Add the investment transaction
+      const newTransaction = {
+        id: `tx${Date.now()}`,
+        description: "Investment Purchase",
+        amount: -investmentAmount,
+        date: new Date().toISOString().split('T')[0],
+        category: "Investment"
+      };
+      
+      // Only keep the most recent 4 transactions
+      const updatedTransactions = [newTransaction, ...prev.recentTransactions].slice(0, 4);
+      
+      return {
+        ...prev,
+        balance: formatCurrency(newBalance),
+        recentTransactions: updatedTransactions
+      };
+    });
+  }, []);
+
+  // Get available balance as a number for validations
+  const getAvailableBalance = useCallback(() => {
+    return parseCurrency(financialData.balance);
+  }, [financialData.balance]);
+
+
+  const value = {
+    financialData,
+    updateBalance,
+    getAvailableBalance
+  };
+
+  return (
+    <FinancialDataContext.Provider value={value}>
+      {children}
+    </FinancialDataContext.Provider>
+  );
 }; 

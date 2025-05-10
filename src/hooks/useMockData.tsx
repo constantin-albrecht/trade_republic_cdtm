@@ -71,7 +71,7 @@ export const useMockData = () => {
     setFinancialData(prev => {
       const currentBalance = parseCurrency(prev.balance);
       const newBalance = currentBalance - investmentAmount;
-      
+       
       // Add the investment transaction
       const newTransaction = {
         id: `tx${Date.now()}`,
