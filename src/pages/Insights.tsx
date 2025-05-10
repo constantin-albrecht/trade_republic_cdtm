@@ -5,8 +5,10 @@ import InsightCardWithPopup from '@/components/insights/InsightCardWithPopup';
 import SubscriptionOptimization from '@/components/insights/SubscriptionOptimization';
 import ChatBot from '@/components/insights/ChatBot';
 import { Scissors, AlertTriangle } from 'lucide-react';
+import { useRealData } from '@/hooks/useRealData';
 
 const Insights: React.FC = () => {
+  const { financialData } = useRealData();
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Financial Insights</h1>
@@ -15,15 +17,15 @@ const Insights: React.FC = () => {
         <FinancialGoals />
         
         <div className="space-y-4">
-          <InsightCardWithPopup 
+          {financialData.mcc_count > 0 && <InsightCardWithPopup 
             title="Subscription Optimization" 
-            description="You could save $45 monthly by optimizing your subscriptions. We found 3 services you barely use."
+            description = {`You could save ${financialData.subscription_value} monthly by optimizing your subscriptions. We found ${financialData.mcc_count} services you could consider cancelling`}
             icon={<Scissors />}
             color="#8B5CF6"
             buttonText="Optimize Now"
           >
             <SubscriptionOptimization />
-          </InsightCardWithPopup>
+          </InsightCardWithPopup>}
           
           <InsightCardWithPopup 
             title="Spending Anomaly" 

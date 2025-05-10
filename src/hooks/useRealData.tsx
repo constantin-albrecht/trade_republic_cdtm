@@ -37,6 +37,8 @@ interface FinancialData {
     date: string;
     category: string;
   }>;
+  subscription_value: string;
+  mcc_count: number;
 }
 
 const formatCurrency = (amount: number): string => {
@@ -51,7 +53,9 @@ export const useRealData = () => {
     monthlyExpenses: '$0.00',
     savingsRate: '0%',
     spendingData: [],
-    recentTransactions: []
+    recentTransactions: [],
+    subscription_value: '0.00',
+    mcc_count: 0
   });
 
   useEffect(() => {
@@ -74,6 +78,8 @@ export const useRealData = () => {
           dynamicTyping: true
         });
         console.log('Parsed banking data:', bankingResult.data.length, 'transactions');
+
+        
 
         // Load trading data
         console.log('Attempting to load trading data...');
@@ -106,14 +112,16 @@ export const useRealData = () => {
           category: string;
         }> = [];
 
-        
-
+        let mcc_count = 0;
+        let subscription_value = 0;
         bankingResult.data.forEach(tx => {
         const amount = tx.side === 'CREDIT' ? tx.amount : -tx.amount;
-          if (tx.userId === '13afc351-1b0e-423c-93d7-f76d9813c63c') {
-            console.log('I AM: ', tx.userId, 'IT IS A ', tx.side, 'AND I HAVE THIS AMOUNT: ', amount);
+          if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6') {
             balance += amount;
-            console.log('I AM: ', tx.userId, 'AND I HAVE THIS BALANCE: ', balance);
+            if (tx.mcc && (tx.mcc == '4899' || tx.mcc == '5968' || tx.mcc == '5967')) {
+              subscription_value += tx.amount;
+              mcc_count += 1;
+            }
           }
           
           // Add to recent transactions
@@ -125,19 +133,10 @@ export const useRealData = () => {
             category: tx.type
           });
         });
-
-        // Not needed because the banking csv already includes the trading data!!!
-        /* tradingResult.data.forEach(tx => {
-            if (tx.userId === '13afc351-1b0e-423c-93d7-f76d9813c63c') {
-                const positionValue = tx.executionSize * tx.executionPrice;
-                if (tx.direction === 'BUY') {
-                    balance -= (positionValue + tx.executionFee);
-                } else {
-                    balance += positionValue;
-                }
-            }
-        }); */
         balance += 5000; 
+
+
+
 
     
         let monthlyIncome = 0;
@@ -149,10 +148,10 @@ export const useRealData = () => {
             const startDate = new Date("2024-06-01");
             const endDate = new Date("2024-06-30");
             const date = new Date(tx.bookingDate);
-            if (tx.userId === '13afc351-1b0e-423c-93d7-f76d9813c63c' && date >= startDate && date <= endDate && tx.side === 'CREDIT') {
+            if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6' && date >= startDate && date <= endDate && tx.side === 'CREDIT') {
                 sum += tx.amount;
                 console.log('YES');
-            } else if (tx.userId === '13afc351-1b0e-423c-93d7-f76d9813c63c' && date >= startDate && date <= endDate) {
+            } else if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6' && date >= startDate && date <= endDate) {
                 expenses += tx.amount;
             }
         });
@@ -196,7 +195,9 @@ export const useRealData = () => {
           monthlyExpenses: formatCurrency(monthlyExpenses),
           savingsRate: `${savingsRate}%`,
           spendingData,
-          recentTransactions: transactions.slice(0, 5)
+          recentTransactions: transactions.slice(0, 5),
+          subscription_value: formatCurrency(subscription_value),
+          mcc_count: mcc_count
         });
       } catch (error) {
         console.error('Error processing CSV data:', error);

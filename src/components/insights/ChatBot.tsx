@@ -49,7 +49,7 @@ const ChatBot: React.FC = () => {
     // Simulate bot response
     setTimeout(() => {
       const botResponses = [
-        "REPLACE"
+        "REPLACE. I cannot give you financial advice!"
       ];
       
       const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
