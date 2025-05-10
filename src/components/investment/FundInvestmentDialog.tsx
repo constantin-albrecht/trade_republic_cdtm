@@ -40,7 +40,7 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
   returns,
   risk,
   minimumInvestment,
-  onInvest
+  onInvest 
 }) => {
   const [amount, setAmount] = useState('');
   const minAmount = parseInt(minimumInvestment.replace(/[^0-9]/g, ''));

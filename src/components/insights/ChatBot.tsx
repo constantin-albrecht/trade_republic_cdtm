@@ -1,16 +1,15 @@
-
 import React, { useState } from 'react';
 import { 
   Card, 
   CardContent, 
   CardHeader, 
-  CardTitle,
-  CardFooter
+  CardTitle, 
+  CardFooter 
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { sendMessageToChatGPT } from '@/hooks/gpt'; // Import the function
 
 interface Message {
   id: string;
@@ -30,42 +29,48 @@ const initialMessages: Message[] = [
 
 const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
-  // TODO: Consider starting with a pre-defined set of requirements for the API
   const [inputValue, setInputValue] = useState('');
-  
-  const handleSendMessage = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
-    
-    // Add user message
+
+    // Add the user message
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       content: inputValue,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
-    
+
     setMessages([...messages, userMessage]);
     setInputValue('');
-    
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponses = [
-        "REPLACE. I cannot give you financial advice!"
-      ];
-      
-      const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+    setLoading(true);
+
+    // Send to ChatGPT API
+    const updatedMessages = [...messages, userMessage];
+    try {
+      const botResponse = await sendMessageToChatGPT(updatedMessages);
       
       const botMessage: Message = {
         id: `bot-${Date.now()}`,
-        content: randomResponse,
+        content: botResponse,
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      
-      setMessages(prev => [...prev, botMessage]);
-    }, 1000);
+
+      setMessages(prevMessages => [...prevMessages, botMessage]);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessages(prevMessages => [
+        ...prevMessages, 
+        { id: 'error', content: 'Something went wrong!', sender: 'bot', timestamp: new Date() }
+      ]);
+    } finally {
+      setLoading(false);
+    }
   };
-  
+
   return (
     <Card className="col-span-3">
       <CardHeader>
@@ -76,12 +81,11 @@ const ChatBot: React.FC = () => {
           {messages.map((message) => (
             <div 
               key={message.id}
-              className={cn(
-                "max-w-[75%] rounded-lg p-3",
+              className={`max-w-[75%] rounded-lg p-3 ${
                 message.sender === 'user' 
                   ? "bg-primary text-white self-end"
                   : "bg-secondary self-start"
-              )}
+              }`}
             >
               <p>{message.content}</p>
               <p className="text-xs mt-1 opacity-70">
@@ -102,7 +106,7 @@ const ChatBot: React.FC = () => {
               if (e.key === 'Enter') handleSendMessage();
             }}
           />
-          <Button onClick={handleSendMessage} size="icon">
+          <Button onClick={handleSendMessage} size="icon" disabled={loading}>
             <Send className="h-4 w-4" />
           </Button>
         </div>
