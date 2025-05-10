@@ -12,17 +12,15 @@ const DashboardLayout: React.FC = () => {
   
   return (
     <SidebarProvider>
-      <div className="h-screen flex flex-col overflow-hidden">
+      <div className="min-h-screen flex flex-col">
         <DashboardHeader 
           balance={financialData.balance} 
           netWorth={financialData.netWorth} 
         />
-        <div className="flex flex-1 overflow-hidden">
-          <div className="flex flex-col h-full">
-            <DashboardSidebar />
-          </div>
-          <main className="flex-1 overflow-hidden bg-finance-light-bg">
-            <div className="h-full p-4">
+        <div className="flex flex-1">
+          <DashboardSidebar />
+          <main className="flex-1 bg-finance-light-bg overflow-auto">
+            <div className="p-4">
               <Outlet />
             </div>
           </main>

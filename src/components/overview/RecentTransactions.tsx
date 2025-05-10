@@ -23,12 +23,12 @@ interface RecentTransactionsProps {
 
 const RecentTransactions: React.FC<RecentTransactionsProps> = ({ transactions }) => {
   return (
-    <Card className="h-full">
-      <CardHeader>
+    <Card className="h-[350px]">
+      <CardHeader className="pb-2">
         <CardTitle>Recent Transactions</CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[calc(100%-2rem)]">
+        <ScrollArea className="h-[280px] pr-4">
           <div className="space-y-4">
             {transactions.map((transaction) => (
               <div key={transaction.id} className="flex justify-between items-center">

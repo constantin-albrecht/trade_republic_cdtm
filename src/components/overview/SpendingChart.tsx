@@ -28,12 +28,12 @@ interface SpendingChartProps {
 
 const SpendingChart: React.FC<SpendingChartProps> = ({ spendingData }) => {
   return (
-    <Card className="col-span-2 h-full">
-      <CardHeader>
+    <Card className="col-span-2 h-[350px]">
+      <CardHeader className="pb-2">
         <CardTitle>Spending Breakdown</CardTitle>
         <CardDescription>Your spending activity over the last month</CardDescription>
       </CardHeader>
-      <CardContent className="h-[calc(100%-5rem)]">
+      <CardContent className="h-[280px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={spendingData}>
             <CartesianGrid strokeDasharray="3 3" />

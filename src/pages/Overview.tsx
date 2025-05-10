@@ -16,7 +16,7 @@ const Overview: React.FC = () => {
   const { financialData } = useMockData();
   
   return (
-    <div className="h-full flex flex-col">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Welcome back, {username}</h1>
         <p className="text-muted-foreground">
@@ -24,7 +24,7 @@ const Overview: React.FC = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard 
           title="Total Balance" 
           value={financialData.balance} 
@@ -51,7 +51,7 @@ const Overview: React.FC = () => {
         />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6 flex-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <SpendingChart spendingData={financialData.spendingData} />
         <RecentTransactions transactions={financialData.recentTransactions} />
       </div>

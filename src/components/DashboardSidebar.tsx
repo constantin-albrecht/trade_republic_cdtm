@@ -9,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
 } from "@/components/ui/sidebar";
 import { Home, BarChart2, Wallet } from 'lucide-react';
 
@@ -35,10 +34,9 @@ const DashboardSidebar: React.FC = () => {
   const location = useLocation();
   
   return (
-    <div className="h-full bg-sidebar">
+    <Sidebar className="min-w-[220px]">
       <SidebarContent className="h-full">
         <SidebarGroup>
-          <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => {
@@ -47,11 +45,11 @@ const DashboardSidebar: React.FC = () => {
                   <SidebarMenuItem key={item.path}>
                     <SidebarMenuButton 
                       asChild
-                      className={isActive ? "bg-sidebar-accent" : ""}
+                      className={`${isActive ? "bg-sidebar-accent" : ""} text-white`}
                     >
-                      <Link to={item.path} className="flex items-center gap-3">
+                      <Link to={item.path} className="flex items-center gap-3 w-full">
                         <item.icon className="h-5 w-5" />
-                        <span>{item.title}</span>
+                        <span className="text-base">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -61,7 +59,7 @@ const DashboardSidebar: React.FC = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-    </div>
+    </Sidebar>
   );
 };
 
