@@ -7,6 +7,7 @@ import InvestmentItem from '@/components/investment/InvestmentItem';
 import { Button } from '@/components/ui/button';
 import { Wallet, Lightbulb, Building2 } from 'lucide-react';
 import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
+import { toast } from 'sonner';
 
 const assetClasses = [
   {
@@ -123,6 +124,8 @@ const Investment: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
   const [showRecommendations, setShowRecommendations] = useState(false);
+  const [balance, setBalance] = useState(12456.78);
+  const [netWorth, setNetWorth] = useState(243872.54);
   
   const toggleFilter = (filter: string) => {
     if (selectedFilters.includes(filter)) {
@@ -142,6 +145,17 @@ const Investment: React.FC = () => {
   
   const handleBack = () => {
     setShowRecommendations(false);
+  };
+  
+  const handleInvest = (amount: number) => {
+    // Update balance and net worth
+    setBalance(prev => prev - amount);
+    
+    // Show success toast
+    toast.success(`Successfully invested $${amount.toLocaleString()} in the fund`);
+    
+    // In a real app, this would make an API call to record the investment
+    console.log(`Invested $${amount} in fund`);
   };
   
   return (
@@ -213,6 +227,7 @@ const Investment: React.FC = () => {
                   returns={fund.returns}
                   risk={fund.risk}
                   minimumInvestment={fund.minimumInvestment}
+                  onInvest={handleInvest}
                 />
               ))}
             </div>

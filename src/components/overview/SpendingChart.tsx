@@ -14,8 +14,7 @@ import {
   XAxis, 
   YAxis, 
   CartesianGrid, 
-  Tooltip,
-  Legend
+  Tooltip
 } from "recharts";
 
 // Mock data for spending chart
@@ -43,10 +42,9 @@ const SpendingChart: React.FC = () => {
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip 
-              formatter={(value) => [`$${value}`, 'Spending']}
+              formatter={(value) => [`$${value}`, '']} 
               labelFormatter={(label) => `Date: ${label}`}
             />
-            <Legend />
             <Line
               type="monotone"
               dataKey="spending"

@@ -55,13 +55,13 @@ const InvestmentItem: React.FC<InvestmentItemProps> = ({
           </div>
           
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Minus className="h-4 w-4 mr-1" />
-              Sell
-            </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-green-200 text-green-500 hover:bg-green-50 hover:text-green-600">
               <Plus className="h-4 w-4 mr-1" />
               Buy
+            </Button>
+            <Button variant="outline" size="sm" className="border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600">
+              <Minus className="h-4 w-4 mr-1" />
+              Sell
             </Button>
           </div>
         </div>

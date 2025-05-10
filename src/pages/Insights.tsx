@@ -1,7 +1,8 @@
 
 import React from 'react';
 import FinancialGoals from '@/components/insights/FinancialGoals';
-import InsightCard from '@/components/insights/InsightCard';
+import InsightCardWithPopup from '@/components/insights/InsightCardWithPopup';
+import SubscriptionOptimization from '@/components/insights/SubscriptionOptimization';
 import ChatBot from '@/components/insights/ChatBot';
 import { Scissors, AlertTriangle } from 'lucide-react';
 
@@ -14,20 +15,28 @@ const Insights: React.FC = () => {
         <FinancialGoals />
         
         <div className="space-y-4">
-          <InsightCard 
+          <InsightCardWithPopup 
             title="Subscription Optimization" 
             description="You could save $45 monthly by optimizing your subscriptions. We found 3 services you barely use."
             icon={<Scissors />}
             color="#8B5CF6"
-          />
+            buttonText="Optimize Now"
+          >
+            <SubscriptionOptimization />
+          </InsightCardWithPopup>
           
-          <InsightCard 
+          <InsightCardWithPopup 
             title="Spending Anomaly" 
             description="We detected unusual spending in your dining category this month, 40% higher than your average."
             icon={<AlertTriangle />}
             color="#EF4444"
             buttonText="Review"
-          />
+          >
+            <div className="p-4">
+              <p>Detailed spending anomaly information would be shown here.</p>
+              <p className="mt-2">This is just a placeholder for now.</p>
+            </div>
+          </InsightCardWithPopup>
         </div>
       </div>
       
