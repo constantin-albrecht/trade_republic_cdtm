@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import AssetClassCard from '@/components/investment/AssetClassCard';
 import FilterBubble from '@/components/investment/FilterBubble';
@@ -7,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Wallet, Lightbulb, Building2 } from 'lucide-react';
 import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
-import { useFinancialData } from '@/hooks/useFinancialData';
+import { useMockData } from '@/hooks/useMockData';
 
 const assetClasses = [
   {
@@ -125,8 +126,8 @@ const Investment: React.FC = () => {
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
   const [showRecommendations, setShowRecommendations] = useState(false);
   
-  // Use our new financial data hook
-  const { updateBalance, getAvailableBalance } = useFinancialData();
+  // Use our mock data hook
+  const { updateBalance, getAvailableBalance } = useMockData();
   
   const toggleFilter = (filter: string) => {
     if (selectedFilters.includes(filter)) {
