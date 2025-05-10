@@ -125,24 +125,22 @@ export const useFinancialData = () => {
       // Calculate savings rate
       const savingsRate = monthlyIncome > 0 ? ((monthlyIncome - monthlyExpenses) / monthlyIncome) * 100 : 0;
       
-      // Create spending data for chart
-      const spendingData = bankingData
-        .filter(t => (t.amount as number) < 0)
-        .map(t => ({
-          date: (t.date as string).substring(5), // Format as "MM-DD"
-          spending: Math.abs(t.amount as number)
-        }));
+      // Create spending data for chart - Fix: Ensure date is handled as string 
+      const spendingData = expenseTransactions.map(t => ({
+        date: String(t.date).substring(5), // Ensure date is a string and format as "MM-DD"
+        spending: Math.abs(t.amount as number)
+      }));
       
       // Format recent transactions
       const recentTransactions = bankingData.map((t, index) => ({
         id: `tx${index}`,
-        description: t.description as string,
-        amount: t.amount as number,
-        date: t.date as string,
-        category: t.category as string
+        description: String(t.description),
+        amount: Number(t.amount),
+        date: String(t.date),
+        category: String(t.category)
       }));
       
-      // Update financial data
+      // Update financial data with properly formatted values
       setFinancialData({
         balance: formatCurrency(balance),
         netWorth: formatCurrency(netWorth),
