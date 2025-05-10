@@ -1,0 +1,245 @@
+
+import React, { useState } from 'react';
+import AssetClassCard from '@/components/investment/AssetClassCard';
+import FilterBubble from '@/components/investment/FilterBubble';
+import FundCard from '@/components/investment/FundCard';
+import InvestmentItem from '@/components/investment/InvestmentItem';
+import { Button } from '@/components/ui/button';
+import { Wallet, Lightbulb, Building2 } from 'lucide-react';
+import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
+
+const assetClasses = [
+  {
+    id: "vc",
+    title: "Venture Capital",
+    description: "High risk, high reward investments in early stage startups with potential for significant growth.",
+    icon: <Lightbulb />
+  },
+  {
+    id: "infra",
+    title: "Infrastructure",
+    description: "Moderate risk investments in physical assets like energy, transportation and communication networks.",
+    icon: <Building2 />
+  },
+  {
+    id: "pe",
+    title: "Private Equity",
+    description: "Investment in private companies or buyouts of public companies with the goal of selling for profit.",
+    icon: <Wallet />
+  }
+];
+
+const filterOptions = [
+  "Environment", "Medium Size", "Short-Term", "Technology", 
+  "Healthcare", "High Growth", "Sustainable", "Emerging Markets",
+  "Dividend", "Low Risk"
+];
+
+const recommendedFunds = [
+  {
+    id: "fund1",
+    title: "Global Tech Growth Fund",
+    description: "A venture capital fund focused on emerging technology companies with high growth potential.",
+    returns: "15-20% p.a.",
+    risk: "High" as const,
+    minimumInvestment: "$10,000",
+    features: [
+      { text: "Portfolio of 25+ tech startups", icon: <CheckCircle2 className="h-4 w-4" /> },
+      { text: "5-year investment horizon", icon: <Calendar className="h-4 w-4" /> },
+      { text: "Quarterly performance reports", icon: <TrendingUp className="h-4 w-4" /> },
+      { text: "Access to exclusive investor events", icon: <CheckCircle2 className="h-4 w-4" /> }
+    ]
+  },
+  {
+    id: "fund2",
+    title: "Sustainable Infrastructure Fund",
+    description: "Invests in renewable energy infrastructure projects across North America and Europe.",
+    returns: "8-12% p.a.",
+    risk: "Medium" as const,
+    minimumInvestment: "$25,000",
+    features: [
+      { text: "Focus on solar and wind projects", icon: <CheckCircle2 className="h-4 w-4" /> },
+      { text: "7-10 year investment period", icon: <Calendar className="h-4 w-4" /> },
+      { text: "Stable cash flow from operations", icon: <TrendingUp className="h-4 w-4" /> },
+      { text: "Environmentally certified projects", icon: <CheckCircle2 className="h-4 w-4" /> }
+    ]
+  },
+  {
+    id: "fund3",
+    title: "Healthcare Innovation Fund",
+    description: "Private equity fund specializing in mid-stage healthcare and biotech companies.",
+    returns: "12-18% p.a.",
+    risk: "Medium" as const,
+    minimumInvestment: "$50,000",
+    features: [
+      { text: "Focus on medical devices & therapeutics", icon: <CheckCircle2 className="h-4 w-4" /> },
+      { text: "3-8 year exit strategy", icon: <Clock className="h-4 w-4" /> },
+      { text: "Quarterly investor updates", icon: <TrendingUp className="h-4 w-4" /> },
+      { text: "Advisory board of medical professionals", icon: <CheckCircle2 className="h-4 w-4" /> }
+    ]
+  }
+];
+
+const currentInvestments = [
+  {
+    id: "inv1",
+    name: "European Growth Fund II",
+    assetClass: "Private Equity",
+    fundSize: "$450M",
+    ticketSize: "$50,000",
+    date: "Jan 15, 2025",
+    returns: {
+      value: 12.5,
+      isPositive: true
+    }
+  },
+  {
+    id: "inv2",
+    name: "Renewable Energy Infrastructure",
+    assetClass: "Infrastructure",
+    fundSize: "$1.2B",
+    ticketSize: "$75,000",
+    date: "Nov 30, 2024",
+    returns: {
+      value: 7.8,
+      isPositive: true
+    }
+  },
+  {
+    id: "inv3",
+    name: "Tech Ventures Fund",
+    assetClass: "Venture Capital",
+    fundSize: "$250M",
+    ticketSize: "$25,000",
+    date: "Mar 22, 2025",
+    returns: {
+      value: 2.3,
+      isPositive: false
+    }
+  }
+];
+
+const Investment: React.FC = () => {
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
+  const [showRecommendations, setShowRecommendations] = useState(false);
+  
+  const toggleFilter = (filter: string) => {
+    if (selectedFilters.includes(filter)) {
+      setSelectedFilters(selectedFilters.filter(f => f !== filter));
+    } else {
+      setSelectedFilters([...selectedFilters, filter]);
+    }
+  };
+  
+  const handleAssetSelect = (assetId: string) => {
+    setSelectedAsset(assetId);
+  };
+  
+  const handleNext = () => {
+    setShowRecommendations(true);
+  };
+  
+  const handleBack = () => {
+    setShowRecommendations(false);
+  };
+  
+  return (
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold tracking-tight">Investment Opportunities</h1>
+      
+      {!showRecommendations ? (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {assetClasses.map((assetClass) => (
+              <AssetClassCard 
+                key={assetClass.id}
+                title={assetClass.title}
+                description={assetClass.description}
+                icon={assetClass.icon}
+                isSelected={selectedAsset === assetClass.id}
+                onClick={() => handleAssetSelect(assetClass.id)}
+              />
+            ))}
+          </div>
+          
+          <div>
+            <h2 className="text-xl font-semibold mb-3">Investment Preferences</h2>
+            <p className="text-muted-foreground mb-4">Select criteria that matter to you</p>
+            
+            <div className="flex flex-wrap gap-3">
+              {filterOptions.map((filter) => (
+                <FilterBubble 
+                  key={filter}
+                  label={filter}
+                  isSelected={selectedFilters.includes(filter)}
+                  onClick={() => toggleFilter(filter)}
+                />
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-end mt-6">
+            <Button 
+              onClick={handleNext}
+              disabled={!selectedAsset}
+              size="lg"
+            >
+              Next
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <Button 
+            variant="outline" 
+            onClick={handleBack}
+            className="mb-4"
+          >
+            Back to Selection
+          </Button>
+          
+          <div>
+            <h2 className="text-xl font-semibold mb-1">Investment Recommendations</h2>
+            <p className="text-muted-foreground mb-4">Based on your preferences</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {recommendedFunds.map((fund) => (
+                <FundCard 
+                  key={fund.id}
+                  title={fund.title}
+                  description={fund.description}
+                  features={fund.features}
+                  returns={fund.returns}
+                  risk={fund.risk}
+                  minimumInvestment={fund.minimumInvestment}
+                />
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h2 className="text-xl font-semibold mb-1">Latest Investments</h2>
+            <p className="text-muted-foreground mb-4">Your current investment portfolio</p>
+            
+            <div className="space-y-2">
+              {currentInvestments.map((investment) => (
+                <InvestmentItem 
+                  key={investment.id}
+                  name={investment.name}
+                  assetClass={investment.assetClass}
+                  fundSize={investment.fundSize}
+                  ticketSize={investment.ticketSize}
+                  date={investment.date}
+                  returns={investment.returns}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Investment;
