@@ -35,8 +35,8 @@ const DashboardSidebar: React.FC = () => {
   const location = useLocation();
   
   return (
-    <Sidebar>
-      <SidebarContent>
+    <div className="h-full bg-sidebar">
+      <SidebarContent className="h-full">
         <SidebarGroup>
           <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -61,7 +61,7 @@ const DashboardSidebar: React.FC = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-    </Sidebar>
+    </div>
   );
 };
 

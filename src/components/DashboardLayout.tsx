@@ -18,9 +18,11 @@ const DashboardLayout: React.FC = () => {
           netWorth={financialData.netWorth} 
         />
         <div className="flex flex-1 overflow-hidden">
-          <DashboardSidebar />
+          <div className="flex flex-col h-full">
+            <DashboardSidebar />
+          </div>
           <main className="flex-1 overflow-hidden bg-finance-light-bg">
-            <div className="h-full p-6">
+            <div className="h-full p-4">
               <Outlet />
             </div>
           </main>

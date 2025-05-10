@@ -159,12 +159,12 @@ const Investment: React.FC = () => {
   };
   
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Investment Opportunities</h1>
+    <div className="h-full flex flex-col">
+      <h1 className="text-2xl font-bold tracking-tight mb-2">Investment Opportunities</h1>
       
       {!showRecommendations ? (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="flex flex-col h-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {assetClasses.map((assetClass) => (
               <AssetClassCard 
                 key={assetClass.id}
@@ -177,11 +177,11 @@ const Investment: React.FC = () => {
             ))}
           </div>
           
-          <div>
-            <h2 className="text-xl font-semibold mb-3">Investment Preferences</h2>
-            <p className="text-muted-foreground mb-4">Select criteria that matter to you</p>
+          <div className="mt-2">
+            <h2 className="text-lg font-semibold mb-1">Investment Preferences</h2>
+            <p className="text-muted-foreground mb-2 text-sm">Select criteria that matter to you</p>
             
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {filterOptions.map((filter) => (
                 <FilterBubble 
                   key={filter}
@@ -193,31 +193,32 @@ const Investment: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex justify-end mt-6">
+          <div className="flex justify-end mt-auto">
             <Button 
               onClick={handleNext}
               disabled={!selectedAsset}
-              size="lg"
+              size="sm"
             >
               Next
             </Button>
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="flex flex-col h-full overflow-hidden">
           <Button 
             variant="outline" 
             onClick={handleBack}
-            className="mb-4"
+            className="mb-2 self-start"
+            size="sm"
           >
             Back to Selection
           </Button>
           
-          <div>
-            <h2 className="text-xl font-semibold mb-1">Investment Recommendations</h2>
-            <p className="text-muted-foreground mb-4">Based on your preferences</p>
+          <div className="mb-2">
+            <h2 className="text-lg font-semibold mb-1">Investment Recommendations</h2>
+            <p className="text-muted-foreground mb-2 text-sm">Based on your preferences</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {recommendedFunds.map((fund) => (
                 <FundCard 
                   key={fund.id}
@@ -233,11 +234,11 @@ const Investment: React.FC = () => {
             </div>
           </div>
           
-          <div>
-            <h2 className="text-xl font-semibold mb-1">Latest Investments</h2>
-            <p className="text-muted-foreground mb-4">Your current investment portfolio</p>
+          <div className="mt-auto">
+            <h2 className="text-lg font-semibold mb-1">Latest Investments</h2>
+            <p className="text-muted-foreground mb-2 text-sm">Your current investment portfolio</p>
             
-            <div className="space-y-2">
+            <div className="space-y-1">
               {currentInvestments.map((investment) => (
                 <InvestmentItem 
                   key={investment.id}
@@ -251,7 +252,7 @@ const Investment: React.FC = () => {
               ))}
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
