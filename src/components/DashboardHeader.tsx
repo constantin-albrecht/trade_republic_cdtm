@@ -13,7 +13,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance, netWorth }) 
     <header className="bg-white border-b z-50 shadow-sm sticky top-0 w-full">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold text-finance-primary">Finance.io</h1>
+          <img src="logo.png" alt="Trade Republic Logo" className="mr-2" style={{ width: '220px' }} />
+          
         </div>
         
         <div className="hidden sm:flex items-center gap-8 text-center">
