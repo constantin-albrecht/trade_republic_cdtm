@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, Bot } from 'lucide-react';
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { sendMessageToChatGPT } from '@/hooks/gpt';
 import { toast } from "@/hooks/use-toast";
 
@@ -33,6 +34,16 @@ const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
@@ -105,32 +116,35 @@ const ChatBot: React.FC = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col space-y-30 h-44 overflow-y-auto mb-4 p-2">
-          {messages.map((message) => (
-            <div 
-              key={message.id}
-              className={`max-w-[75%] rounded-lg p-3 ${
-                message.sender === 'user' 
-                  ? "bg-primary text-white self-end"
-                  : "bg-secondary self-start"
-              }`}
-            >
-              <p>{message.content}</p>
-              <p className="text-xs mt-1 opacity-70">
-                {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </p>
-            </div>
-          ))}
-          {loading && (
-            <div className="bg-secondary self-start max-w-[75%] rounded-lg p-3">
-              <div className="flex space-x-2">
-                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+        <ScrollArea className="h-44 mb-4">
+          <div className="flex flex-col space-y-4 p-2">
+            {messages.map((message) => (
+              <div 
+                key={message.id}
+                className={`max-w-[75%] rounded-lg p-3 ${
+                  message.sender === 'user' 
+                    ? "bg-primary text-white self-end"
+                    : "bg-secondary self-start"
+                }`}
+              >
+                <p>{message.content}</p>
+                <p className="text-xs mt-1 opacity-70">
+                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
               </div>
-            </div>
-          )}
-        </div>
+            ))}
+            {loading && (
+              <div className="bg-secondary self-start max-w-[75%] rounded-lg p-3">
+                <div className="flex space-x-2">
+                  <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+        </ScrollArea>
       </CardContent>
       <CardFooter>
         <div className="flex w-full space-x-2">
