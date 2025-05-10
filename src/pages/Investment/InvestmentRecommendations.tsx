@@ -1,8 +1,7 @@
-/*
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import FundCard from '@/components/investment/FundCard';
-import InvestmentItem from '@/components/investment/InvestmentItem';
 import { toast } from 'sonner';
 import { useMockData } from '@/hooks/useMockData';
 import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
@@ -116,4 +115,3 @@ const InvestmentRecommendations: React.FC<InvestmentRecommendationsProps> = ({ o
 };
 
 export default InvestmentRecommendations;
-*/
