@@ -6,9 +6,14 @@ import SubscriptionOptimization from '@/components/insights/SubscriptionOptimiza
 import ChatBot from '@/components/insights/ChatBot';
 import { Scissors, AlertTriangle } from 'lucide-react';
 import { useRealData } from '@/hooks/useRealData';
-
+import Anomalies from '@/components/insights/Anomalies';
 const Insights: React.FC = () => {
   const { financialData } = useRealData();
+  const thisMonth = financialData.monthlyExpenses;
+  const prevMonth = financialData.prevMonthExpenses;
+  const parseExpense = (expense: string) => parseFloat(expense.replace('$', '').replace(',', ''));
+  const diff = parseExpense(thisMonth) - parseExpense(prevMonth);
+  const percentage = ((parseExpense(thisMonth) - parseExpense(prevMonth)) / parseExpense(prevMonth)) * 100;
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Financial Insights</h1>
@@ -29,15 +34,12 @@ const Insights: React.FC = () => {
           
           <InsightCardWithPopup 
             title="Spending Anomaly" 
-            description="We detected unusual spending in your dining category this month, 40% higher than your average."
+            description= {`We detected unusual spending in your dining category this month, ${percentage.toFixed(2)}% higher than your average.`}
             icon={<AlertTriangle />}
             color="#EF4444"
             buttonText="Review"
           >
-            <div className="p-4">
-              <p>Detailed spending anomaly information would be shown here.</p>
-              <p className="mt-2">This is just a placeholder for now.</p>
-            </div>
+          <Anomalies />
           </InsightCardWithPopup>
         </div>
       </div>

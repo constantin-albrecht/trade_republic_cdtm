@@ -101,7 +101,7 @@ const FundCard: React.FC<FundCardProps> = ({
         features={features}
         returns={returns || ''}
         risk={risk || 'Medium'}
-        minimumInvestment={minimumInvestment || '$10,000'}
+        minimumInvestment={minimumInvestment || '$100'}
         onInvest={onInvest}
       />
     </>

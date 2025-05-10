@@ -17,8 +17,6 @@ const SubscriptionOptimization: React.FC = () => {
           If you invest this amount in an ETF with 7% annual return, you could have <span className="font-medium">${(parseFloat(financialData.subscription_value.replace('$', ''))* 12 * 5 * 1.4).toFixed(2)}</span> in 5 years.
         </p>
       </div>
-
-      
     </div>
   );
 };

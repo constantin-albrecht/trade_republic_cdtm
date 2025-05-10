@@ -28,6 +28,7 @@ interface FinancialData {
   netWorth: string;
   monthlyIncome: string;
   monthlyExpenses: string;
+  prevMonthExpenses: string;
   savingsRate: string;
   spendingData: Array<{ date: string; spending: number }>;
   recentTransactions: Array<{
@@ -51,6 +52,7 @@ export const useRealData = () => {
     netWorth: '0.00',
     monthlyIncome: '$0.00',
     monthlyExpenses: '$0.00',
+    prevMonthExpenses: '$0.00',
     savingsRate: '0%',
     spendingData: [],
     recentTransactions: [],
@@ -138,21 +140,26 @@ export const useRealData = () => {
 
 
 
-    
+        let prevMonthExpenses = 0;
         let monthlyIncome = 0;
         let monthlyExpenses = 0;
         let sum = 0;
         let expenses = 0;
         bankingResult.data.forEach(tx => {
             // bookingDate is a string in the format YYYY-MM-DD
-            const startDate = new Date("2024-06-01");
-            const endDate = new Date("2024-06-30");
+            const startDate = new Date("2024-05-01");
+            const endDate = new Date("2024-05-30");
+            const prevMonthStart = new Date("2024-04-01");
+            const prevMonthEnd = new Date("2024-04-31");
             const date = new Date(tx.bookingDate);
             if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6' && date >= startDate && date <= endDate && tx.side === 'CREDIT') {
                 sum += tx.amount;
                 console.log('YES');
             } else if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6' && date >= startDate && date <= endDate) {
                 expenses += tx.amount;
+            // Prev month expenses:
+            } else if (tx.userId === '0bf3b550-dc5b-4f3e-91f4-162b687b97c6' && date >= prevMonthStart && date <= prevMonthEnd) {
+                prevMonthExpenses += tx.amount;
             }
         });
         monthlyIncome = sum;
@@ -197,6 +204,7 @@ export const useRealData = () => {
           spendingData,
           recentTransactions: transactions.slice(0, 5),
           subscription_value: formatCurrency(subscription_value),
+          prevMonthExpenses: formatCurrency(prevMonthExpenses),
           mcc_count: mcc_count
         });
       } catch (error) {

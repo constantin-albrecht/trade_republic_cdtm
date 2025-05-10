@@ -30,6 +30,7 @@ const initialMessages: Message[] = [
 
 const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
+  // TODO: Consider starting with a pre-defined set of requirements for the API
   const [inputValue, setInputValue] = useState('');
   
   const handleSendMessage = () => {
