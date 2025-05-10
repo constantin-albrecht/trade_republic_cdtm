@@ -34,7 +34,7 @@ const DashboardSidebar: React.FC = () => {
   const location = useLocation();
   
   return (
-    <Sidebar className="min-w-[220px] fixed h-full" variant="sidebar" collapsible="none">
+    <Sidebar className="min-w-[180px] fixed h-full" variant="sidebar" collapsible="none">
       <SidebarContent className="h-full">
         <SidebarGroup>
           <SidebarGroupContent>
@@ -47,9 +47,9 @@ const DashboardSidebar: React.FC = () => {
                       asChild
                       className={`${isActive ? "bg-sidebar-accent" : ""} text-white`}
                     >
-                      <Link to={item.path} className="flex items-center gap-3 w-full">
-                        <item.icon className="h-5 w-5" />
-                        <span className="text-base">{item.title}</span>
+                      <Link to={item.path} className="flex items-center gap-2 w-full">
+                        <item.icon className="h-4 w-4" />
+                        <span className="text-sm">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

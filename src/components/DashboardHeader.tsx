@@ -10,7 +10,7 @@ interface DashboardHeaderProps {
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance, netWorth }) => {
   return (
-    <header className="bg-white border-b z-50 shadow-sm">
+    <header className="bg-white border-b z-50 shadow-sm sticky top-0 w-full">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center">
           <h1 className="text-2xl font-bold text-finance-primary">Finance.io</h1>
