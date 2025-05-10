@@ -1,28 +1,26 @@
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
+import { useMockData } from '@/hooks/useMockData';
 
 const DashboardLayout: React.FC = () => {
-  // Mock data - in a real app, this would come from an API or state
-  const financialData = {
-    balance: "$12,456.78",
-    netWorth: "$243,872.54"
-  };
+  // Use our mock data hook to fetch financial data
+  const { financialData } = useMockData();
   
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex flex-col w-full">
-        <DashboardHeader balance={financialData.balance} netWorth={financialData.netWorth} />
-        <div className="flex flex-1 w-full overflow-hidden">
+      <div className="h-screen flex flex-col overflow-hidden">
+        <DashboardHeader 
+          balance={financialData.balance} 
+          netWorth={financialData.netWorth} 
+        />
+        <div className="flex flex-1 overflow-hidden">
           <DashboardSidebar />
-          <main className="flex-1 overflow-auto bg-finance-light-bg">
-            <div className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <SidebarTrigger />
-              </div>
+          <main className="flex-1 overflow-hidden bg-finance-light-bg">
+            <div className="h-full p-6">
               <Outlet />
             </div>
           </main>
