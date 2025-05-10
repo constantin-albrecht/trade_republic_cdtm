@@ -169,7 +169,7 @@ const Investment: React.FC = () => {
   
   return (
     <div className="h-full flex flex-col">
-      <h1 className="text-2xl font-bold tracking-tight mb-2">Investment Opportunities</h1>
+      <h1 className="text-3xl font-bold tracking-tight mb-2">Investment Opportunities</h1>
       
       {!showRecommendations ? (
         <div className="flex flex-col h-full">
