@@ -9,11 +9,10 @@ interface DashboardHeaderProps {
  
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance }) => {
   return (
-    <header className="bg-white border-b z-50 shadow-sm sticky top-0 w-full">
-      <div className="flex items-center justify-between p-4">
+    <header className="bg-white border-b z-50 shadow-sm sticky top-0 w-full left-0 right-0">
+      <div className="flex items-center justify-between p-4 max-w-full">
         <div className="flex items-center">
           <img src="logo.png" alt="Trade Republic Logo" className="mr-2" style={{ width: '220px' }} />
-          
         </div>
         
         <div className="hidden sm:flex items-center gap-8 text-center">
