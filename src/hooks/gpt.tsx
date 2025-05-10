@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 // Make sure to load the API key from your environment variables
@@ -8,8 +9,10 @@ export const sendMessageToChatGPT = async (messages: any[]) => {
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
-        model: "gpt-4", // Or your preferred model
+        model: "gpt-4o-mini", // Using a more modern model
         messages: messages,
+        temperature: 0.7,
+        max_tokens: 500,
       },
       {
         headers: {
@@ -22,6 +25,6 @@ export const sendMessageToChatGPT = async (messages: any[]) => {
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error("Error sending message to ChatGPT:", error);
-    return "Sorry, there was an error. Please try again.";
+    throw new Error("Failed to get response from ChatGPT");
   }
 };

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Card, 
@@ -8,8 +9,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send } from 'lucide-react';
-import { sendMessageToChatGPT } from '@/hooks/gpt'; // Import the function
+import { Send, Bot } from 'lucide-react';
+import { sendMessageToChatGPT } from '@/hooks/gpt';
+import { toast } from "@/hooks/use-toast";
 
 interface Message {
   id: string;
@@ -43,14 +45,31 @@ const ChatBot: React.FC = () => {
       timestamp: new Date(),
     };
 
-    setMessages([...messages, userMessage]);
+    setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputValue('');
     setLoading(true);
 
-    // Send to ChatGPT API
-    const updatedMessages = [...messages, userMessage];
+    // Prepare messages for OpenAI format
+    const formattedMessages = messages.map(msg => ({
+      role: msg.sender === 'user' ? 'user' : 'assistant',
+      content: msg.content
+    }));
+
+    // Add the new user message
+    formattedMessages.push({
+      role: 'user',
+      content: userMessage.content
+    });
+
+    // Add system message to guide the AI
+    formattedMessages.unshift({
+      role: 'system',
+      content: 'You are a helpful financial assistant. Provide concise, clear advice on financial matters. Do not make up information or give financial advice that could be harmful.'
+    });
+
     try {
-      const botResponse = await sendMessageToChatGPT(updatedMessages);
+      // Send to ChatGPT API
+      const botResponse = await sendMessageToChatGPT(formattedMessages);
       
       const botMessage: Message = {
         id: `bot-${Date.now()}`,
@@ -62,9 +81,14 @@ const ChatBot: React.FC = () => {
       setMessages(prevMessages => [...prevMessages, botMessage]);
     } catch (error) {
       console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to get a response from the financial assistant.",
+        variant: "destructive",
+      });
       setMessages(prevMessages => [
         ...prevMessages, 
-        { id: 'error', content: 'Something went wrong!', sender: 'bot', timestamp: new Date() }
+        { id: `error-${Date.now()}`, content: 'Sorry, I had trouble processing that request. Please try again.', sender: 'bot', timestamp: new Date() }
       ]);
     } finally {
       setLoading(false);
@@ -73,8 +97,11 @@ const ChatBot: React.FC = () => {
 
   return (
     <Card className="col-span-3">
-      <CardHeader>
-        <CardTitle>Financial Assistant</CardTitle>
+      <CardHeader className="flex flex-row items-center">
+        <CardTitle className="flex items-center">
+          <Bot className="h-5 w-5 mr-2" />
+          Financial Assistant
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col space-y-4 h-60 overflow-y-auto mb-4 p-2">
@@ -93,6 +120,15 @@ const ChatBot: React.FC = () => {
               </p>
             </div>
           ))}
+          {loading && (
+            <div className="bg-secondary self-start max-w-[75%] rounded-lg p-3">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
+          )}
         </div>
       </CardContent>
       <CardFooter>
@@ -105,6 +141,7 @@ const ChatBot: React.FC = () => {
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSendMessage();
             }}
+            disabled={loading}
           />
           <Button onClick={handleSendMessage} size="icon" disabled={loading}>
             <Send className="h-4 w-4" />
