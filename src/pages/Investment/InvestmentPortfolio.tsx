@@ -1,4 +1,4 @@
-/*
+
 import React from 'react';
 import InvestmentItem from '@/components/investment/InvestmentItem';
 
@@ -65,4 +65,3 @@ const InvestmentPortfolio: React.FC = () => {
 };
 
 export default InvestmentPortfolio;
-*/
