@@ -20,8 +20,8 @@ const DashboardLayout: React.FC = () => {
           <div className="w-[180px] flex-shrink-0">
             <DashboardSidebar />
           </div>
-          <main className="flex-1 bg-finance-light-bg overflow-auto w-full max-w-full">
-            <div className="p-6 md:p-8 lg:p-12">
+          <main className="flex-1 bg-finance-light-bg overflow-auto w-full">
+            <div className="p-6 md:p-8 lg:p-12 max-w-[1400px] mx-auto">
               <Outlet />
             </div>
           </main>
