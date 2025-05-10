@@ -1,8 +1,7 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 // Mock data to simulate banking and trading data
-const mockBankingData = {
+const initialBankingData = {
   // Current account balance
   balance: "$14,752.36",
   // Net worth calculated from all assets
@@ -31,6 +30,16 @@ const mockBankingData = {
   ]
 };
 
+// Parse a currency string (like $14,752.36) to a number
+const parseCurrency = (currencyString: string): number => {
+  return parseFloat(currencyString.replace(/[$,]/g, ''));
+};
+
+// Format a number to a currency string (like $14,752.36)
+const formatCurrency = (amount: number): string => {
+  return `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+};
+
 // Mock function to simulate connecting to the Trade Republic API
 const connectToTradeRepublicAPI = async () => {
   console.log("Connecting to Trade Republic API...");
@@ -45,7 +54,7 @@ const connectToTradeRepublicAPI = async () => {
 
 export const useMockData = () => {
   const [isConnected, setIsConnected] = useState(false);
-  const [financialData, setFinancialData] = useState(mockBankingData);
+  const [financialData, setFinancialData] = useState(initialBankingData);
   
   // Simulate API connection on component mount
   useEffect(() => {
@@ -57,8 +66,41 @@ export const useMockData = () => {
     connectAPI();
   }, []);
   
+  // Update balance after investment
+  const updateBalance = useCallback((investmentAmount: number) => {
+    setFinancialData(prev => {
+      const currentBalance = parseCurrency(prev.balance);
+      const newBalance = currentBalance - investmentAmount;
+      
+      // Add the investment transaction
+      const newTransaction = {
+        id: `tx${Date.now()}`,
+        description: "Investment Purchase",
+        amount: -investmentAmount,
+        date: new Date().toISOString().split('T')[0],
+        category: "Investment"
+      };
+      
+      // Only keep the most recent 4 transactions
+      const updatedTransactions = [newTransaction, ...prev.recentTransactions].slice(0, 4);
+      
+      return {
+        ...prev,
+        balance: formatCurrency(newBalance),
+        recentTransactions: updatedTransactions
+      };
+    });
+  }, []);
+  
+  // Get available balance as a number for validations
+  const getAvailableBalance = useCallback(() => {
+    return parseCurrency(financialData.balance);
+  }, [financialData.balance]);
+  
   return {
     isConnected,
     financialData,
+    updateBalance,
+    getAvailableBalance
   };
 };

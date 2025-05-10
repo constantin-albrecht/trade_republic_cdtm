@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Wallet, Lightbulb, Building2 } from 'lucide-react';
 import { CheckCircle2, TrendingUp, Clock, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
+import { useMockData } from '@/hooks/useMockData';
 
 const assetClasses = [
   {
@@ -124,8 +125,9 @@ const Investment: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
   const [showRecommendations, setShowRecommendations] = useState(false);
-  const [balance, setBalance] = useState(12456.78);
-  const [netWorth, setNetWorth] = useState(243872.54);
+  
+  // Use our mock data hook
+  const { updateBalance, getAvailableBalance } = useMockData();
   
   const toggleFilter = (filter: string) => {
     if (selectedFilters.includes(filter)) {
@@ -148,8 +150,15 @@ const Investment: React.FC = () => {
   };
   
   const handleInvest = (amount: number) => {
-    // Update balance and net worth
-    setBalance(prev => prev - amount);
+    const availableBalance = getAvailableBalance();
+    
+    if (amount > availableBalance) {
+      toast.error(`Insufficient funds. Available balance: ${availableBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
+      return;
+    }
+    
+    // Update balance
+    updateBalance(amount);
     
     // Show success toast
     toast.success(`Successfully invested $${amount.toLocaleString()} in the fund`);

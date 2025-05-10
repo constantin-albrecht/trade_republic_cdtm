@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TrendingUp, Calendar, CheckCircle2, Clock } from 'lucide-react';
+import { TrendingUp, Calendar, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
+import { useMockData } from '@/hooks/useMockData';
 
 interface Feature {
   text: string;
@@ -43,10 +44,24 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
 }) => {
   const [amount, setAmount] = useState('');
   const minAmount = parseInt(minimumInvestment.replace(/[^0-9]/g, ''));
+  const { getAvailableBalance } = useMockData();
+  const [availableBalance, setAvailableBalance] = useState(0);
+  const [insufficientFunds, setInsufficientFunds] = useState(false);
+  
+  useEffect(() => {
+    if (isOpen) {
+      setAvailableBalance(getAvailableBalance());
+    }
+  }, [isOpen, getAvailableBalance]);
+  
+  useEffect(() => {
+    const investAmount = parseInt(amount) || 0;
+    setInsufficientFunds(investAmount > availableBalance);
+  }, [amount, availableBalance]);
   
   const handleInvest = () => {
     const investAmount = parseInt(amount);
-    if (investAmount >= minAmount) {
+    if (investAmount >= minAmount && investAmount <= availableBalance) {
       onInvest(investAmount);
       onClose();
     }
@@ -93,7 +108,12 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="investment-amount">Investment Amount (Minimum: {minimumInvestment})</Label>
+            <div className="flex justify-between">
+              <Label htmlFor="investment-amount">Investment Amount (Minimum: {minimumInvestment})</Label>
+              <span className="text-sm text-muted-foreground">
+                Available: ${availableBalance.toLocaleString()}
+              </span>
+            </div>
             <Input 
               id="investment-amount" 
               type="number" 
@@ -101,7 +121,13 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               min={minAmount}
+              className={insufficientFunds ? "border-red-500" : ""}
             />
+            {insufficientFunds && (
+              <div className="text-red-500 text-sm flex items-center gap-1 mt-1">
+                <AlertCircle className="h-3 w-3" /> Insufficient funds
+              </div>
+            )}
           </div>
         </div>
         
@@ -109,7 +135,7 @@ const FundInvestmentDialog: React.FC<FundInvestmentDialogProps> = ({
           <Button variant="outline" onClick={onClose} className="mr-2">Cancel</Button>
           <Button 
             onClick={handleInvest}
-            disabled={!amount || parseInt(amount) < minAmount}
+            disabled={!amount || parseInt(amount) < minAmount || insufficientFunds}
           >
             Invest Now
           </Button>
