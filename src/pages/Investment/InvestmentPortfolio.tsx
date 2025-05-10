@@ -1,4 +1,4 @@
-
+/*
 import React from 'react';
 import InvestmentItem from '@/components/investment/InvestmentItem';
 
@@ -8,7 +8,7 @@ const currentInvestments = [
     name: "European Growth Fund II",
     assetClass: "Private Equity",
     fundSize: "$450M",
-    ticketSize: "$50,000",
+    ticketSize: "$200",
     date: "Jan 15, 2025",
     returns: {
       value: 12.5,
@@ -20,7 +20,7 @@ const currentInvestments = [
     name: "Renewable Energy Infrastructure",
     assetClass: "Infrastructure",
     fundSize: "$1.2B",
-    ticketSize: "$75,000",
+    ticketSize: "$700",
     date: "Nov 30, 2024",
     returns: {
       value: 7.8,
@@ -32,7 +32,7 @@ const currentInvestments = [
     name: "Tech Ventures Fund",
     assetClass: "Venture Capital",
     fundSize: "$250M",
-    ticketSize: "$25,000",
+    ticketSize: "$500",
     date: "Mar 22, 2025",
     returns: {
       value: 2.3,
@@ -65,3 +65,4 @@ const InvestmentPortfolio: React.FC = () => {
 };
 
 export default InvestmentPortfolio;
+*/

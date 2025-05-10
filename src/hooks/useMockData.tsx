@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 // Mock data to simulate banking and trading data
 const initialBankingData = {
   // Current account balance
-  balance: "$14,752.36",
+  balance: "$14,752.36", 
   // Net worth calculated from all assets
   netWorth: "$267,405.82",
   // Monthly data

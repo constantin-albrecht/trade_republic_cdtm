@@ -44,7 +44,7 @@ const recommendedFunds = [
     description: "A venture capital fund focused on emerging technology companies with high growth potential.",
     returns: "15-20% p.a.",
     risk: "High" as const,
-    minimumInvestment: "$10,000",
+    minimumInvestment: "$100",
     features: [
       { text: "Portfolio of 25+ tech startups", icon: <CheckCircle2 className="h-4 w-4" /> },
       { text: "5-year investment horizon", icon: <Calendar className="h-4 w-4" /> },
@@ -58,7 +58,7 @@ const recommendedFunds = [
     description: "Invests in renewable energy infrastructure projects across North America and Europe.",
     returns: "8-12% p.a.",
     risk: "Medium" as const,
-    minimumInvestment: "$25,000",
+    minimumInvestment: "$250",
     features: [
       { text: "Focus on solar and wind projects", icon: <CheckCircle2 className="h-4 w-4" /> },
       { text: "7-10 year investment period", icon: <Calendar className="h-4 w-4" /> },
@@ -72,7 +72,7 @@ const recommendedFunds = [
     description: "Private equity fund specializing in mid-stage healthcare and biotech companies.",
     returns: "12-18% p.a.",
     risk: "Medium" as const,
-    minimumInvestment: "$50,000",
+    minimumInvestment: "$500",
     features: [
       { text: "Focus on medical devices & therapeutics", icon: <CheckCircle2 className="h-4 w-4" /> },
       { text: "3-8 year exit strategy", icon: <Clock className="h-4 w-4" /> },

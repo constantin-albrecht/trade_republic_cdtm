@@ -1,4 +1,4 @@
-
+/*
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import FundCard from '@/components/investment/FundCard';
@@ -116,3 +116,4 @@ const InvestmentRecommendations: React.FC<InvestmentRecommendationsProps> = ({ o
 };
 
 export default InvestmentRecommendations;
+*/
