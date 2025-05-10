@@ -4,11 +4,12 @@ import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
-import { useMockData } from '@/hooks/useMockData';
+//import { useMockData } from '@/hooks/useMockData';
+import { useRealData } from '@/hooks/useRealData';
 
 const DashboardLayout: React.FC = () => {
   // Use our mock data hook to fetch financial data
-  const { financialData } = useMockData();
+  const { financialData } = useRealData();
   
   return (
     <SidebarProvider>

@@ -17,7 +17,7 @@ interface StatCardProps {
     isPositive: boolean;
   };
   className?: string;
-}
+} 
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, className }) => {
   return (
