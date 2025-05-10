@@ -17,11 +17,11 @@ const DashboardLayout: React.FC = () => {
           balance={financialData.balance} 
         />
         <div className="flex flex-1 w-full">
-          <div className="w-[180px]">
+          <div className="w-[180px] flex-shrink-0">
             <DashboardSidebar />
           </div>
-          <main className="flex-1 bg-finance-light-bg overflow-auto w-full">
-            <div className="p-12">
+          <main className="flex-1 bg-finance-light-bg overflow-auto w-full max-w-full">
+            <div className="p-6 md:p-8 lg:p-12">
               <Outlet />
             </div>
           </main>

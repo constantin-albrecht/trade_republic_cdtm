@@ -28,7 +28,7 @@ interface SpendingChartProps {
 
 const SpendingChart: React.FC<SpendingChartProps> = ({ spendingData }) => {
   return (
-    <Card className="col-span-2 h-[350px]">
+    <Card className="col-span-2 h-[350px] w-full">
       <CardHeader className="pb-2">
         <CardTitle>Spending Breakdown</CardTitle>
         <CardDescription>Your spending activity over the last month</CardDescription>
