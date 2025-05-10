@@ -5,15 +5,15 @@ import StatCard from '@/components/overview/StatCard';
 import SpendingChart from '@/components/overview/SpendingChart';
 import RecentTransactions from '@/components/overview/RecentTransactions';
 import { Wallet, TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
-import { useMockData } from '@/hooks/useMockData';
+import { useFinancialData } from '@/hooks/useFinancialData';
 
 const Overview: React.FC = () => {
   // Mock data for username
   const username = "John";
   const today = format(new Date(), "MMMM d, yyyy");
   
-  // Get financial data from our mock service
-  const { financialData } = useMockData();
+  // Get financial data from our new financial data hook
+  const { financialData } = useFinancialData();
   
   return (
     <div className="space-y-6 w-full">
