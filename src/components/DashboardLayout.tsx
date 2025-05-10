@@ -18,7 +18,9 @@ const DashboardLayout: React.FC = () => {
           netWorth={financialData.netWorth} 
         />
         <div className="flex flex-1">
-          <DashboardSidebar />
+          <div className="w-[220px]">
+            <DashboardSidebar />
+          </div>
           <main className="flex-1 bg-finance-light-bg overflow-auto">
             <div className="p-4">
               <Outlet />

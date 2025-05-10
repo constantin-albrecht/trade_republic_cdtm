@@ -34,7 +34,7 @@ const DashboardSidebar: React.FC = () => {
   const location = useLocation();
   
   return (
-    <Sidebar className="min-w-[220px]">
+    <Sidebar className="min-w-[220px] fixed h-full" variant="sidebar" collapsible="none">
       <SidebarContent className="h-full">
         <SidebarGroup>
           <SidebarGroupContent>
