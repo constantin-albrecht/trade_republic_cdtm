@@ -27,7 +27,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ balance }) => {
             <Bell className="h-5 w-5 text-gray-600" />
           </button>
           <Avatar>
-            <AvatarImage src="/placeholder.svg" alt="User" />
+            <AvatarImage 
+              src="https://media.licdn.com/dms/image/v2/D4D03AQHgoaOVvG6LVg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1725447724887?e=2147483647&v=beta&t=oOzSWc9YiwIJdWa7R8VfcF-UDY6-bOXSHyBOtVDXnYc" 
+              alt="User" 
+            />
             <AvatarFallback>UR</AvatarFallback>
           </Avatar>
         </div>
