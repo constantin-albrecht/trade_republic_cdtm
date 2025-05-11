@@ -16,7 +16,7 @@ const Overview: React.FC = () => {
   const { financialData } = useRealData();
   
   return (
-    <div className="space-y-6 w-full max-w-full">
+    <div className="space-y-6 w-full">
       <div className="w-full">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome back, {username}</h1>
         <p className="text-muted-foreground">
@@ -24,7 +24,7 @@ const Overview: React.FC = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
         <StatCard 
           title="Total Balance" 
           value={financialData.balance} 
