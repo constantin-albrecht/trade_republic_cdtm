@@ -40,10 +40,10 @@ const filterOptions = [
 const recommendedFunds = [
   {
     id: "fund1",
-    title: "Global Tech Growth Fund",
-    description: "A venture capital fund focused on emerging technology companies with high growth potential.",
+    title: "EU Tech Growth Fund",
+    description: "A fund focused on technology companies with high growth and synergy potential.",
     returns: "15-20% p.a.",
-    risk: "High" as const,
+    risk: "Medium" as const,
     minimumInvestment: "$100",
     features: [
       { text: "Portfolio of 25+ tech startups", icon: <CheckCircle2 className="h-4 w-4" /> },
@@ -54,10 +54,10 @@ const recommendedFunds = [
   },
   {
     id: "fund2",
-    title: "Sustainable Infrastructure Fund",
-    description: "Invests in renewable energy infrastructure projects across North America and Europe.",
+    title: "Sustainable Energy Fund",
+    description: "Invests in renewable energy companies across North America and Europe.",
     returns: "8-12% p.a.",
-    risk: "Medium" as const,
+    risk: "High" as const,
     minimumInvestment: "$250",
     features: [
       { text: "Focus on solar and wind projects", icon: <CheckCircle2 className="h-4 w-4" /> },
@@ -224,8 +224,7 @@ const Investment: React.FC = () => {
         <div className="flex flex-col h-full overflow-hidden">
           
           <div className="mb-2">
-            <h2 className="text-lg font-semibold mb-1">Based on your preferences</h2>
-            <p className="text-muted-foreground mb-2 text-sm">Based on your preferences</p>
+            
             
             <Button 
             variant="outline" 
