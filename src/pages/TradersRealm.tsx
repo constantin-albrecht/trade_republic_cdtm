@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Treemap } from 'recharts';
 import { ChartContainer, ChartTooltipContent, ChartTooltip } from "@/components/ui/chart";
@@ -60,7 +61,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
 
   return (
     <ChartContainer 
-      className="h-40 w-full" 
+      className="h-40 w-full max-w-3xl mx-auto" 
       config={{
         tech: { theme: { light: "#8884d8", dark: "#8884d8" } },
         health: { theme: { light: "#83a6ed", dark: "#83a6ed" } },
@@ -70,7 +71,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
       }}
     >
       <Treemap
-        width={800}
+        width={600}
         height={160}
         data={data}
         dataKey="size"
@@ -93,17 +94,19 @@ const TraderRow: React.FC<{
   investments: any[];
 }> = ({ name, imageUrl, returnPercentage, investments }) => {
   return (
-    <div className="flex items-center gap-6 p-4 mb-4 w-full">
-      <div className="flex-shrink-0">
-        <img src={imageUrl} alt={name} className="w-16 h-16 rounded-full object-cover" />
+    <div className="flex flex-col md:flex-row items-center gap-6 p-4 mb-4 w-full">
+      <div className="flex items-center gap-4 md:w-1/3 justify-center md:justify-start">
+        <div className="flex-shrink-0">
+          <img src={imageUrl} alt={name} className="w-16 h-16 object-cover" />
+        </div>
+        
+        <div className="flex-shrink-0">
+          <h3 className="text-lg font-semibold">{name}</h3>
+          <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
+        </div>
       </div>
       
-      <div className="flex-shrink-0">
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
-      </div>
-      
-      <div className="flex-1">
+      <div className="flex-1 w-full">
         <TraderInvestmentChart data={investments} />
       </div>
     </div>
@@ -112,12 +115,12 @@ const TraderRow: React.FC<{
 
 const TradersRealm: React.FC = () => {
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col max-w-6xl mx-auto">
       <div className="w-full">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm: The Journey to Trade Republic <span style={{ display: "inline-block", width: "450px" }}></span></h1>  
+        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm: The Journey to Trade Republic</h1>  
       </div>
       
-      <div className="space-y-6">
+      <div className="space-y-6 w-full">
         <TraderRow 
           name="Coin Capital"
           imageUrl="/city.png"
