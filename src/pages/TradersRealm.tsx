@@ -98,7 +98,7 @@ const TraderRow: React.FC<{
       
       <div className="flex-shrink-0">
         <h3 className="text-lg font-semibold">{name}</h3>
-        <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
+        <div className="text-base font-bold text-green-600">{returnPercentage} Return</div>
       </div>
       
       <div className="flex-1">
@@ -112,12 +112,14 @@ const TradersRealm: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
       <div className="w-full">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm: The Journey to Trade Republic <span style={{ display: "inline-block", width: "450px" }}></span></h1>  
+        <h1 className="text-3xl font-bold tracking-tight mb-2 text-center">The Trader's Realm: The Journey to Trade Republic <span style={{ display: "inline-block", width: "450px" }}></span></h1>  
+        <Separator className="my-4" />
+        <p/>
       </div>
       
       <div className="space-y-6">
         <TraderRow 
-          name="Coin Capital"
+          name="1. Coin Capital"
           imageUrl="/city.png"
           returnPercentage={traderInvestmentData[0].returnPercentage}
           investments={traderInvestmentData[0].investments}
@@ -125,7 +127,7 @@ const TradersRealm: React.FC = () => {
         <Separator className="my-4" />
         
         <TraderRow 
-          name="Town of Trades"
+          name="2. Town of Trades"
           imageUrl="/town.png"
           returnPercentage={traderInvestmentData[1].returnPercentage}
           investments={traderInvestmentData[1].investments}
@@ -133,7 +135,7 @@ const TradersRealm: React.FC = () => {
         <Separator className="my-4" />
         
         <TraderRow 
-          name="Village of Value"
+          name="3. Village of Value"
           imageUrl="/village.png"
           returnPercentage={traderInvestmentData[2].returnPercentage}
           investments={traderInvestmentData[2].investments}
