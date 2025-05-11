@@ -24,7 +24,7 @@ const menuItems = [
     icon: BarChart2,
   },
   {
-    title: "Investment",
+    title: "Private Markets",
     path: "/investment",
     icon: Wallet,
   },

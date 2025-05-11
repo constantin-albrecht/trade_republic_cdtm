@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Card,
@@ -22,15 +21,20 @@ interface RecentTransactionsProps {
 }
 
 const RecentTransactions: React.FC<RecentTransactionsProps> = ({ transactions }) => {
+  // Sort transactions by date in descending order (most recent first)
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
   return (
-    <Card className="h-[350px]">
+    <Card className="h-[350px] w-[510px]">
       <CardHeader className="pb-2">
         <CardTitle>Recent Transactions</CardTitle>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[280px] pr-4">
           <div className="space-y-4">
-            {transactions.map((transaction) => (
+            {sortedTransactions.map((transaction) => (
               <div key={transaction.id} className="flex justify-between items-center">
                 <div>
                   <p className="font-medium">{transaction.description}</p>

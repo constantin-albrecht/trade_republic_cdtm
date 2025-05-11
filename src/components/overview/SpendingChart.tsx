@@ -59,7 +59,7 @@ const SpendingChart: React.FC<SpendingChartProps> = ({ spendingData }) => {
   };
 
   return (
-    <Card className="col-span-2 h-[350px] w-full">
+    <Card className="col-span-2 h-[350px] w-[510px]">
       <CardHeader className="pb-2">
         <CardTitle>Spending Breakdown</CardTitle>
         <CardDescription>Your spending across different categories</CardDescription>

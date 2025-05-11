@@ -18,11 +18,11 @@ const Overview: React.FC = () => {
   return (
     <div className="space-y-6 w-full">
       <div className="w-full ">
-        <h1 className="text-3xl font-bold tracking-tight mb-1">Welcome back, {username}<span style={{ display: "inline-block", width: "900px" }}></span></h1>
-        
+        <h1 className="text-3xl font-bold tracking-tight mb-1">Welcome back, {username}</h1>
         <p className="text-muted-foreground mt-1">
-          Here's your financial overview for {today}
+          Here's your financial overview for {today}. In TradeX you have the opportunity to analyze your financial data and invest in a wide range of assets, from stocks to bonds, and now also in Private Markets.
         </p>
+        
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
@@ -52,7 +52,7 @@ const Overview: React.FC = () => {
         />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
         <SpendingChart spendingData={financialData.spendingData} />
         <RecentTransactions transactions={financialData.recentTransactions} />
       </div>

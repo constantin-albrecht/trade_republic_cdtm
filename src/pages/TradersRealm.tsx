@@ -112,9 +112,10 @@ const TradersRealm: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
       <div className="w-full">
-        <h1 className="text-3xl font-bold tracking-tight mb-2 text-center">The Trader's Realm: The Journey to Trade Republic <span style={{ display: "inline-block", width: "450px" }}></span></h1>  
+        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm: The Journey to Trade Republic </h1>  
+        <p className="text-muted-foreground">You can see the portfolios of the top three investors who are making the greatest returns at the moment. Of course, in a fully anonymized and secure environment. </p>
         <Separator className="my-4" />
-        <p/>
+        <p></p>
       </div>
       
       <div className="space-y-6">
