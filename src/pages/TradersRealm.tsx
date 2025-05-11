@@ -43,9 +43,7 @@ const traderInvestmentData = [
   }
 ];
 
-// Custom TreeMap chart component for each trader
 const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
-  // Custom tooltip content to show percentage
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -60,7 +58,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
 
   return (
     <ChartContainer 
-      className="h-40 w-full" 
+      className="h-40 w-full max-w-2xl mx-auto"   // height of the tradle style
       config={{
         tech: { theme: { light: "#8884d8", dark: "#8884d8" } },
         health: { theme: { light: "#83a6ed", dark: "#83a6ed" } },
@@ -70,7 +68,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
       }}
     >
       <Treemap
-        width={800}
+        width={600}
         height={160}
         data={data}
         dataKey="size"
@@ -95,7 +93,7 @@ const TraderRow: React.FC<{
   return (
     <div className="flex items-center gap-6 p-4 mb-4 w-full">
       <div className="flex-shrink-0">
-        <img src={imageUrl} alt={name} className="w-16 h-16 rounded-full object-cover" />
+        <img src={imageUrl} alt={name} className="w-16 h-16 object-cover" />
       </div>
       
       <div className="flex-shrink-0">
@@ -146,3 +144,4 @@ const TradersRealm: React.FC = () => {
 };
 
 export default TradersRealm;
+
