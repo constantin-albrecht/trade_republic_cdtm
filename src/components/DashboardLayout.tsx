@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -20,8 +19,8 @@ const DashboardLayout: React.FC = () => {
           <div className="w-[180px] flex-shrink-0">
             <DashboardSidebar />
           </div>
-          <main className="flex-1 bg-finance-light-bg overflow-auto w-full max-w-none">
-            <div className="p-6 md:p-8 lg:p-12 w-full max-w-[1200px] mx-auto">
+          <main className="flex-1 bg-finance-light-bg overflow-auto w-full">
+            <div className="p-6 md:p-8 lg:p-12 w-full">
               <Outlet />
             </div>
           </main>

@@ -66,7 +66,7 @@ const SpendingChart: React.FC<SpendingChartProps> = ({ spendingData }) => {
       </CardHeader>
       <CardContent className="h-[280px]">
         <ChartContainer className="h-full" config={chartConfig}>
-          <RadarChart data={categorySpendingData} margin={{ top: 10, right: 30, bottom: 10, left: 40 }}>
+          <RadarChart data={categorySpendingData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
             <PolarGrid stroke="var(--color-fullMark)" />
             <PolarAngleAxis dataKey="category" tick={{ fill: "hsl(var(--foreground))", fontSize: 12 }} />
             <PolarRadiusAxis angle={30} domain={[0, 1000]} />
