@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Treemap } from 'recharts';
 import { ChartContainer, ChartTooltipContent, ChartTooltip } from "@/components/ui/chart";
+import { Separator } from "@/components/ui/separator";
 
 // Dummy data for the treemap charts
 const traderInvestmentData = [
@@ -93,7 +93,7 @@ const TraderRow: React.FC<{
   investments: any[];
 }> = ({ name, imageUrl, returnPercentage, investments }) => {
   return (
-    <div className="flex items-center gap-6 p-4 border rounded-md shadow-sm mb-6">
+    <div className="flex items-center gap-6 p-4 mb-4">
       <div className="flex-shrink-0">
         <img src={imageUrl} alt={name} className="w-16 h-16 rounded-full object-cover" />
       </div>
@@ -112,7 +112,7 @@ const TraderRow: React.FC<{
 
 const TradersRealm: React.FC = () => {
   return (
-    <div className="space-y-6 w-full max-w-5xl mx-auto">
+    <div className="space-y-6 w-full max-w-7xl mx-auto">
       <div className="w-full">
         <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm</h1>
         <p className="text-muted-foreground mb-8">
@@ -120,13 +120,14 @@ const TradersRealm: React.FC = () => {
         </p>
       </div>
       
-      <div className="space-y-8">
+      <div className="space-y-2">
         <TraderRow 
           name="Coin Capital"
           imageUrl="/logosmall2.png"
           returnPercentage={traderInvestmentData[0].returnPercentage}
           investments={traderInvestmentData[0].investments}
         />
+        <Separator className="my-4" />
         
         <TraderRow 
           name="Town of Trades"
@@ -134,6 +135,7 @@ const TradersRealm: React.FC = () => {
           returnPercentage={traderInvestmentData[1].returnPercentage}
           investments={traderInvestmentData[1].investments}
         />
+        <Separator className="my-4" />
         
         <TraderRow 
           name="Village of Value"
