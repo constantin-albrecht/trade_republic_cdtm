@@ -62,7 +62,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
         data={data}
         dataKey="size"
         nameKey="name"
-        ratio={4/3}
+        aspectRatio={4/3}
       >
         <ChartTooltip
           content={<ChartTooltipContent />}
