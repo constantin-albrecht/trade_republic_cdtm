@@ -17,9 +17,10 @@ const Overview: React.FC = () => {
   
   return (
     <div className="space-y-6 w-full">
-      <div className="w-full">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome back, {username}</h1>
-        <p className="text-muted-foreground">
+      <div className="w-full ">
+        <h1 className="text-3xl font-bold tracking-tight mb-1">Welcome back, {username}<span style={{ display: "inline-block", width: "900px" }}></span></h1>
+        
+        <p className="text-muted-foreground mt-1">
           Here's your financial overview for {today}
         </p>
       </div>

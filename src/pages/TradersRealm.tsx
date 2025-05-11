@@ -70,7 +70,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
       }}
     >
       <Treemap
-        width={600}
+        width={800}
         height={160}
         data={data}
         dataKey="size"
@@ -93,17 +93,17 @@ const TraderRow: React.FC<{
   investments: any[];
 }> = ({ name, imageUrl, returnPercentage, investments }) => {
   return (
-    <div className="flex items-center gap-6 p-4 mb-4">
+    <div className="flex items-center gap-6 p-4 mb-4 w-full">
       <div className="flex-shrink-0">
         <img src={imageUrl} alt={name} className="w-16 h-16 rounded-full object-cover" />
       </div>
       
-      <div className="flex-1">
+      <div className="flex-shrink-0">
         <h3 className="text-lg font-semibold">{name}</h3>
         <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
       </div>
       
-      <div className="flex-1 max-w-2xl">
+      <div className="flex-1">
         <TraderInvestmentChart data={investments} />
       </div>
     </div>
@@ -112,18 +112,15 @@ const TraderRow: React.FC<{
 
 const TradersRealm: React.FC = () => {
   return (
-    <div className="space-y-6 w-full max-w-7xl mx-auto">
+    <div className="h-full flex flex-col">
       <div className="w-full">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm</h1>
-        <p className="text-muted-foreground mb-8">
-          The Journey to Trade Republic
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm: The Journey to Trade Republic <span style={{ display: "inline-block", width: "450px" }}></span></h1>  
       </div>
       
-      <div className="space-y-2">
+      <div className="space-y-6">
         <TraderRow 
           name="Coin Capital"
-          imageUrl="/logosmall2.png"
+          imageUrl="/city.png"
           returnPercentage={traderInvestmentData[0].returnPercentage}
           investments={traderInvestmentData[0].investments}
         />
@@ -131,7 +128,7 @@ const TradersRealm: React.FC = () => {
         
         <TraderRow 
           name="Town of Trades"
-          imageUrl="/logosmall.png"
+          imageUrl="/town.png"
           returnPercentage={traderInvestmentData[1].returnPercentage}
           investments={traderInvestmentData[1].investments}
         />
@@ -139,7 +136,7 @@ const TradersRealm: React.FC = () => {
         
         <TraderRow 
           name="Village of Value"
-          imageUrl="/logoX.png"
+          imageUrl="/village.png"
           returnPercentage={traderInvestmentData[2].returnPercentage}
           investments={traderInvestmentData[2].investments}
         />
