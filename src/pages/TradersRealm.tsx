@@ -70,7 +70,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
       }}
     >
       <Treemap
-        width={300}
+        width={600}
         height={160}
         data={data}
         dataKey="size"
@@ -103,7 +103,7 @@ const TraderRow: React.FC<{
         <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
       </div>
       
-      <div className="flex-1 max-w-sm">
+      <div className="flex-1 max-w-2xl">
         <TraderInvestmentChart data={investments} />
       </div>
     </div>
