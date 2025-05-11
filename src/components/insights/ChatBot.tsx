@@ -36,9 +36,12 @@ const ChatBot: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when messages change
+  // Modified to only scroll when messages change after user interaction
   useEffect(() => {
-    scrollToBottom();
+    // Only scroll on new messages after the initial load
+    if (messages.length > initialMessages.length) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const scrollToBottom = () => {
