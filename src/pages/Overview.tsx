@@ -9,7 +9,7 @@ import { useRealData } from '@/hooks/useRealData';
 
 const Overview: React.FC = () => {
   // Mock data for username
-  const username = "John";
+  const username = "Thomas";
   const today = format(new Date(), "MMMM d, yyyy");
   
   // Get financial data from our mock service
