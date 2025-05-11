@@ -67,7 +67,7 @@ const ProgressRing: React.FC<ProgressRingProps> = ({
   return (
     <div className="progress-ring-container" style={{ width: size, height: size, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
       <svg width={size} height={size}>
-        {/* Background circle */}
+        {}
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -101,6 +101,7 @@ const FinancialGoals: React.FC = () => {
       <CardHeader>
         <CardTitle>Financial Goals</CardTitle>
         <CardDescription>Track your progress towards your financial goals</CardDescription>
+        <br/><p/>
       </CardHeader>
       <CardContent>
         <div className="flex justify-center mt-14">
