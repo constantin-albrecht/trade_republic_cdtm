@@ -45,6 +45,19 @@ const traderInvestmentData = [
 
 // Custom TreeMap chart component for each trader
 const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
+  // Custom tooltip content to show percentage
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 border rounded shadow-sm">
+          <p className="font-semibold">{payload[0].payload.name}</p>
+          <p className="text-finance-primary">{payload[0].value}% of portfolio</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <ChartContainer 
       className="h-40 w-full" 
@@ -65,7 +78,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
         aspectRatio={4/3}
       >
         <ChartTooltip
-          content={<ChartTooltipContent />}
+          content={<CustomTooltip />}
         />
       </Treemap>
     </ChartContainer>
@@ -90,7 +103,7 @@ const TraderRow: React.FC<{
         <div className="text-xl font-bold text-green-600">{returnPercentage} Return</div>
       </div>
       
-      <div className="flex-1 max-w-xs">
+      <div className="flex-1 max-w-sm">
         <TraderInvestmentChart data={investments} />
       </div>
     </div>
@@ -99,7 +112,7 @@ const TraderRow: React.FC<{
 
 const TradersRealm: React.FC = () => {
   return (
-    <div className="space-y-6 w-full">
+    <div className="space-y-6 w-full max-w-5xl mx-auto">
       <div className="w-full">
         <h1 className="text-3xl font-bold tracking-tight mb-2">The Trader's Realm</h1>
         <p className="text-muted-foreground mb-8">
