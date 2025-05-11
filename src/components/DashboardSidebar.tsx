@@ -10,7 +10,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from "@/components/ui/sidebar";
-import { Home, BarChart2, Wallet } from 'lucide-react';
+import { Home, BarChart2, Wallet, Award } from 'lucide-react';
 
 const menuItems = [
   {
@@ -27,6 +27,11 @@ const menuItems = [
     title: "Investment",
     path: "/investment",
     icon: Wallet,
+  },
+  {
+    title: "Trader's Realm",
+    path: "/traders-realm",
+    icon: Award,
   }
 ];
 

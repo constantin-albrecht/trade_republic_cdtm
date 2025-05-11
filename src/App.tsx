@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +10,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import Overview from "./pages/Overview";
 import Insights from "./pages/Insights";
 import Investment from "./pages/Investment";
+import TradersRealm from "./pages/TradersRealm";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,7 @@ const App = () => (
               <Route index element={<Overview />} />
               <Route path="insights" element={<Insights />} />
               <Route path="investment" element={<Investment />} />
+              <Route path="traders-realm" element={<TradersRealm />} />
             </Route>
             {}
             <Route path="*" element={<NotFound />} />
