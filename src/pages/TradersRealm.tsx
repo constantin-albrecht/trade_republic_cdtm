@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Responsive, TreeMap } from 'recharts';
+import { Treemap } from 'recharts';
 import { ChartContainer, ChartTooltipContent, ChartTooltip } from "@/components/ui/chart";
 
 // Dummy data for the treemap charts
@@ -49,14 +49,14 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
     <ChartContainer 
       className="h-40 w-full" 
       config={{
-        tech: { theme: { light: "#8884d8" } },
-        health: { theme: { light: "#83a6ed" } },
-        finance: { theme: { light: "#8dd1e1" } },
-        consumer: { theme: { light: "#82ca9d" } },
-        energy: { theme: { light: "#a4de6c" } },
+        tech: { theme: { light: "#8884d8", dark: "#8884d8" } },
+        health: { theme: { light: "#83a6ed", dark: "#83a6ed" } },
+        finance: { theme: { light: "#8dd1e1", dark: "#8dd1e1" } },
+        consumer: { theme: { light: "#82ca9d", dark: "#82ca9d" } },
+        energy: { theme: { light: "#a4de6c", dark: "#a4de6c" } },
       }}
     >
-      <TreeMap
+      <Treemap
         width={300}
         height={160}
         data={data}
@@ -67,7 +67,7 @@ const TraderInvestmentChart: React.FC<{ data: any[] }> = ({ data }) => {
         <ChartTooltip
           content={<ChartTooltipContent />}
         />
-      </TreeMap>
+      </Treemap>
     </ChartContainer>
   );
 };
