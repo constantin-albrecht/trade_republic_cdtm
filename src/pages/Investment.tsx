@@ -174,6 +174,7 @@ const Investment: React.FC = () => {
           <p className="text-muted-foreground">
           Your way to invest in Private Markets. Personalized. For everyone.
           </p>
+          <br></br>
       </div>
       
       {!showRecommendations ? (
@@ -192,8 +193,10 @@ const Investment: React.FC = () => {
           </div>
           
           <div className="mt-2">
+            <br></br>
             <h2 className="text-lg font-semibold mb-1">Investment Preferences</h2>
             <p className="text-muted-foreground mb-2 text-sm">Select criteria that matter to you</p>
+            <p/>
             
             <div className="flex flex-wrap gap-2">
               {filterOptions.map((filter) => (
